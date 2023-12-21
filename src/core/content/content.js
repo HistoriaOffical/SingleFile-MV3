@@ -117,12 +117,42 @@ async function savePage(message) {
 			}
 			processing = true;
 			try {
+				const liveSite = !options.toHistoriaLocal;
+				const url = liveSite ? 'https://historia.network/Create/Create/ArchiveImport' : 'https://localhost:44322/Create/Create/ArchiveImport';
 				const pageData = await processPage(options);
 				if (pageData) {
 					if (((!options.backgroundSave && !options.saveToClipboard) || options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveToDropbox) && options.confirmFilename) {
 						pageData.filename = ui.prompt("Save as", pageData.filename) || pageData.filename;
 					}
 					await download.downloadPage(pageData, options);
+					pageData['access_token'] = options.liveSiteAccessToken;
+					await window.fetch(url, {
+						method: 'post', 
+						headers: {
+							'Content-Type': 'application/json; charset=utf-8'
+						},						
+						body: JSON.stringify(pageData),
+					})
+					.then((response) => {
+						if (response.status === 401) {
+							console.error('Unauthorized: User not authenticated');
+							alert("Can't submit to https://historia.network; Did you setup your API Key in both the web application and extension?");
+						} else if (response.ok) {
+							return response.json();
+						} else {
+							// Handle other errors
+							throw new Error('Error: ' + response.statusText);
+						}
+					})
+					.then((data) => console.log("IMPORT DATA:" + data))
+					.catch((error) => {
+						console.error('Error:', error);
+						if(!liveSite) {
+							alert("Can't connect to Historia Local Web Application, Are you sure it's running?")
+						} else {
+							alert("Can't submit to https://historia.network; Did you setup your API Key in both the web application and extension?")
+						}
+					});
 				}
 			} catch (error) {
 				if (!processor.cancelled) {

@@ -1,6 +1,6 @@
 {
 	"extensionDescription": {
-		"message": "Save a complete page into a single HTML file",
+		"message": "Save a complete page into a single HTML file and upload to Historia Network",
 		"description": "Description of the extension."
 	},
 	"commandSaveSelectedTabs": {
@@ -15,6 +15,14 @@
 		"message": "Save page with SingleFile",
 		"description": "Menu entry: 'Save page with SingleFile'"
 	},
+	"menuSavePageToHistoria": {
+		"message": "Send Page to Historia Network (Live)",
+		"description": "Menu entry: 'Send Page to Historia Network (Live)'"
+	},		
+	"menuSavePageToHistoriaLocal": {
+		"message": "Send Page to Historia Network (Local)",
+		"description": "Menu entry: 'Send Page to Historia Network (Local)'"
+	},	
 	"menuSaveSelectedLinks": {
 		"message": "Save selected links",
 		"description": "Menu entry: 'Save selected links'"
@@ -96,16 +104,16 @@
 		"description": "Menu entry: 'Auto-save' > Auto-save all tabs'"
 	},
 	"buttonDefaultTooltip": {
-		"message": "Save page with SingleFile",
-		"description": "Button title: 'Save page with SingleFile'"
+		"message": "Save page with Historia Network SingleFile",
+		"description": "Button title: 'Save page with Historia Network SingleFile'"
 	},
 	"buttonBlockedBadge": {
 		"message": "🚫",
 		"description": "Button badge when the page is blocked: '🚫'"
 	},
 	"buttonBlockedTooltip": {
-		"message": "This page cannot be saved with SingleFile",
-		"description": "Button title: 'This page cannot be saved with SingleFile'"
+		"message": "This page cannot be saved with Historia SingleFile",
+		"description": "Button title: 'This page cannot be saved with Historia SingleFile'"
 	},
 	"buttonInitializingTooltip": {
 		"message": "Initializing SingleFile",
@@ -419,6 +427,10 @@
 		"message": "Auto-save",
 		"description": "Options sub-title: 'Auto-save'"
 	},
+	"optionsLiveSiteTitle": {
+		"message": "Historia Network API Key",
+		"description": "Options sub-title: 'Historia Network API Key'"
+	},	
 	"optionsAutoSettingsSubTitle": {
 		"message": "Auto-settings rules",
 		"description": "Options sub-title: 'Auto-settings rules'"

@@ -32,6 +32,8 @@ import * as button from "./ui-button.js";
 
 const menus = browser.contextMenus;
 const MENU_ID_SAVE_PAGE = "save-page";
+const MENU_ID_SAVE_PAGE_TO_HISTORIA = "save-page-to-historia";
+const MENU_ID_SAVE_PAGE_TO_HISTORIA_NETWORK = "save-page-to-historia-network";
 const MENU_ID_EDIT_AND_SAVE_PAGE = "edit-and-save-page";
 const MENU_ID_SAVE_WITH_PROFILE = "save-with-profile";
 const MENU_ID_SAVE_SELECTED_LINKS = "save-selected-links";
@@ -61,6 +63,8 @@ const MENU_UPDATE_RULE_MESSAGE = browser.i18n.getMessage("menuUpdateRule");
 const MENU_SAVE_PAGE_MESSAGE = browser.i18n.getMessage("menuSavePage");
 const MENU_SAVE_WITH_PROFILE = browser.i18n.getMessage("menuSaveWithProfile");
 const MENU_SAVE_SELECTED_LINKS = browser.i18n.getMessage("menuSaveSelectedLinks");
+const MENU_SAVE_PAGE_TO_HISTORIA_MESSAGE = browser.i18n.getMessage("menuSavePageToHistoria");
+const MENU_SAVE_PAGE_TO_HISTORIA_LOCAL_MESSAGE = browser.i18n.getMessage("menuSavePageToHistoriaLocal");
 const MENU_EDIT_PAGE_MESSAGE = browser.i18n.getMessage("menuEditPage");
 const MENU_EDIT_AND_SAVE_PAGE_MESSAGE = browser.i18n.getMessage("menuEditAndSavePage");
 const MENU_VIEW_PENDINGS_MESSAGE = browser.i18n.getMessage("menuViewPendingSaves");
@@ -138,11 +142,17 @@ async function createMenus(tab) {
 		await menus.removeAll();
 		const defaultContextsEnabled = defaultContextsDisabled.concat(...pageContextsEnabled);
 		const defaultContexts = options.contextMenuEnabled ? defaultContextsEnabled : defaultContextsDisabled;
+
 		menus.create({
-			id: MENU_ID_SAVE_PAGE,
+			id: MENU_ID_SAVE_PAGE_TO_HISTORIA_NETWORK,
 			contexts: defaultContexts,
-			title: MENU_SAVE_PAGE_MESSAGE
+			title: MENU_SAVE_PAGE_TO_HISTORIA_MESSAGE
 		});
+		menus.create({
+			id: MENU_ID_SAVE_PAGE_TO_HISTORIA,
+			contexts: defaultContexts,
+			title: MENU_SAVE_PAGE_TO_HISTORIA_LOCAL_MESSAGE
+		});	
 		menus.create({
 			id: MENU_ID_EDIT_AND_SAVE_PAGE,
 			contexts: defaultContexts,
@@ -397,6 +407,26 @@ async function initialize() {
 				business.saveTabs([tab]);
 			}
 		}
+		if (event.menuItemId == MENU_ID_SAVE_PAGE_TO_HISTORIA) {
+			console.log('save to historia');
+			if (event.linkUrl) {
+				console.log('save to historia event.linkUrl', event.linkUrl);
+				business.saveUrls([event.linkUrl], true);
+			} else {
+				console.log('save to historia saveTabs', tab);
+				business.saveTabs([tab], true, true);
+			}
+		}
+		if (event.menuItemId == MENU_ID_SAVE_PAGE_TO_HISTORIA_NETWORK) {
+			console.log('save to historia network');
+			if (event.linkUrl) {
+				console.log('save to historia event.linkUrl', event.linkUrl);
+				business.saveUrls([event.linkUrl], true);
+			} else {
+				console.log('save to historia saveTabs', tab);
+				business.saveTabs([tab], false, true);
+			}
+		}	
 		if (event.menuItemId == MENU_ID_EDIT_AND_SAVE_PAGE) {
 			const allTabsData = await tabsData.get(tab.id);
 			if (allTabsData[tab.id].savedPageDetected) {

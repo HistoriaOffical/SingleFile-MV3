@@ -229,7 +229,7 @@
 				<input type="checkbox" id="removeAlternativeFontsInput">
 			</div>
 		</details>
-		<details>
+		<details style="display:none">
 			<summary id="destinationLabel"></summary>
 			<div class="option">
 				<label for="saveToFilesystemInput" id="saveToFilesystemLabel"></label>
@@ -373,7 +373,7 @@
 				<input type="checkbox" id="passReferrerOnErrorInput">
 			</div>
 		</details>
-		<details>
+		<details style="display:none">
 			<summary id="editorLabel"></summary>
 			<div class="option">
 				<label for="defaultEditorModeInput" id="defaultEditorModeLabel"></label>
@@ -533,6 +533,13 @@
 				<input type="checkbox" id="showAutoSaveProfileInput">
 			</div>
 		</details>
+		<details>
+			<summary id="liveSiteLabel">Historia Network API Key</summary>
+			<div class="option">
+				<label for="liveSiteAccessTokenInput" id="liveSiteAccessTokenLabel">API Key</label>
+				<input type="text" id="liveSiteAccessTokenInput">
+			</div>
+		</details>		
 		<div class="option bottom">
 			<a href="help.html" target="SingleFileHelpPage" id="helpLabel"></a>
 			<div class="buttons">
@@ -540,9 +547,9 @@
 					<input type="checkbox" id="synchronizeInput">
 					<label for="synchronizeInput" id="synchronizeLabel"></label>
 				</div>
-				<button id="importButton"></button>
-				<button id="exportButton"></button>
-				<button id="resetButton"></button>
+				<button id="importButton" style="display:none" ></button>
+				<button id="exportButton" style="display:none" ></button>
+				<button id="resetButton" style="display:none" ></button>
 				<input type="file" id="fileInput" hidden>
 			</div>
 		</div>

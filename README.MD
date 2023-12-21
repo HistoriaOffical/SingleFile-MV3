@@ -1,4 +1,4 @@
-# SingleFile MV3
+# SingleFile MV3 for Historia Network Blockchain Web Interface
 
 This is the (future) new version of
 [SingleFile](https://github.com/gildas-lormeau/SingleFile) compatible with the
