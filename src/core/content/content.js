@@ -118,7 +118,7 @@ async function savePage(message) {
 			processing = true;
 			try {
 				const liveSite = !options.toHistoriaLocal;
-				const url = liveSite ? 'https://historia.network/Create/Create/ArchiveImport' : 'https://localhost:44322/Create/Create/ArchiveImport';
+				const url = liveSite ? 'https://historia.network/Create/Create/ArchiveImport' : 'http://localhost:5000/Create/Create/ArchiveImport';
 				const pageData = await processPage(options);
 				if (pageData) {
 					if (((!options.backgroundSave && !options.saveToClipboard) || options.saveToGDrive || options.saveToGitHub || options.saveWithCompanion || options.saveWithWebDAV || options.saveToDropbox) && options.confirmFilename) {
